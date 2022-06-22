@@ -1,7 +1,7 @@
 {
-  "name": "movies-app",
+  "name": "c",
   "version": "1.0.0",
-  "description": "",
+  "description": "This repository contains the source code of the Movies App.",
   "main": "src/index.js",
   "scripts": {
     "dev": "webpack --mode development",
@@ -28,5 +28,13 @@
   },
   "dependencies": {
     "normalize.css": "^8.0.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spacetrap/NewMovies.git"
+  },
+  "bugs": {
+    "url": "https://github.com/spacetrap/NewMovies/issues"
+  },
+  "homepage": "https://github.com/spacetrap/NewMovies#readme"
 }
