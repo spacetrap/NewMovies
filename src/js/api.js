@@ -1,12 +1,12 @@
-import {generateApiUrl} from './utils';
-import {renderMovies, renderError} from './templates';
+import {generateApiUrl, generateApiUrlSearch} from './utils';
+import {renderMovies, renderError, renderDetails} from './templates';
 
 export const getMovies = (path, selector) => {
   fetch(generateApiUrl(path))
     .then(res => res.json())
     // .then(({results, status_message, status_code}) => {
     .then(data  => {
-      console.log('results', data.results)
+      // console.log('results', data.results)
       const root = document.querySelector(selector);
   
 
@@ -26,13 +26,12 @@ export const getMovie = (path, selector) => {
     .then(res => res.json())
     .then(data => {
 
-      console.log('data', data);
       const root = document.querySelector(selector);
 
       if (data.status_message && data.status_code) {
         root.innerHTML = renderError({status_code: data.status_code, status_message: data.status_message});
-      } 
-    });
+      }  
+    }); 
 }
 
 export const getMovieDetails = (path, selector) => {
@@ -50,17 +49,18 @@ export const getMovieDetails = (path, selector) => {
     });
 }
 
-// export const getSearch = (query, selector) => {
-//   fetch(generateApiUrl(query))
-//     .then(res => res.json())
-//     .then(data => {
+export const getMovieSearch = (path, selector) => {
+  fetch(generateApiUrlSearch(path))
+    .then(res => res.json())
+    .then(data => {
 
-//       const root = document.querySelector(selector);
+      const root = document.querySelector(selector);
 
-//       if (data.status_message && data.status_code) {
-//         root.innerHTML = renderError({status_code: data.status_code, status_message: data.status_message});
-//       } else {
-//         root.innerHTML = renderDetails(data);
-//       } 
-//     });
-// }
+      if (data.status_message && data.status_code) {
+        root.innerHTML = renderError({status_code: data.status_code, status_message: data.status_message});
+      } else {
+        root.innerHTML = renderMovies(data.results);
+      } 
+    }
+  );
+}
